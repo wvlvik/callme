@@ -1,4 +1,5 @@
 const Base = require('../base.js');
+const Axios = require('axios');
 
 module.exports = class extends Base {
 
@@ -31,6 +32,16 @@ module.exports = class extends Base {
   	const model = await this.model('supercode').delete();
 
     return this.success('删除成功!');
+  }
+
+  async tokenAction() {
+  	const response = await Axios.get('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx5ba56b1ca0d4af23&secret=07df5ad8499980b95020252ced909f65');
+
+
+  	return this.success({
+  		access_token: response.data.access_token
+  	});
+  	
   }
 
 };
