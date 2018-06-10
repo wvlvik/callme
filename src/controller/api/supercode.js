@@ -8,10 +8,9 @@ module.exports = class extends Base {
 
 	async createwxaqrcodeAction() {
 		const weixinService = this.service('weixin', 'api');
-		const miniImage = await weixinService.createwxminiQrcode('wojefojfj23fj3fj92jf');
+		const miniImage = await weixinService.createwxminiQrcode(this.get('id'));
 
 		return this.success(miniImage);
-
 	}
 
 };
