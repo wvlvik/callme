@@ -31,7 +31,7 @@ module.exports = class extends think.Service {
 			return '';
 		}
 
-		if (decoded.watermark.appid !== think.config('weixin.appid')) {
+		if (decoded.watermark.appid !== think.config('weixinmini.appid')) {
 			return '';
 		}
 
