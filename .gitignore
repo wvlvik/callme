@@ -30,7 +30,7 @@ node_modules/
 output/
 output.tar.gz
 
-www/uploads/
+#www/uploads/
 runtime/
 app/
 database.js
