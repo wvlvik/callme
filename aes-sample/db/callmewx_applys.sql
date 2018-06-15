@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 14, 2018 at 04:14 PM
+-- Generation Time: Jun 15, 2018 at 09:21 AM
 -- Server version: 5.5.40
--- PHP Version: 5.4.33
+-- PHP Version: 5.6.36
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `callmewx_applys` (
   `tel` varchar(32) NOT NULL,
   `image` varchar(256) NOT NULL,
   `type` tinyint(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` varchar(64) NOT NULL,
   `supercode_id` varchar(64) NOT NULL,
   `create_date` bigint(128) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
