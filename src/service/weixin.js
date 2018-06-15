@@ -48,7 +48,7 @@ module.exports = class extends think.Service {
 	}
 
 
-	async createwxminiQrcode(suppercode) {
+	async createwxminiQrcode(suppercode, user_id) {
 		const token = await this.getTokenCode();
 		const _this = this;
 
@@ -64,8 +64,7 @@ module.exports = class extends think.Service {
 			})
 			.then(function(response) {
 				// 更新数据
-				const update =  _this.model('supercode').where({id: sc.id}).update({user_id: 11});
-				console.log('---------------add---------------');
+				const update = _this.model('supercode').where({id: sc.id}).update({user_id: user_id});
 
 				return response.data.pipe(fs.createWriteStream('www/uploads/code/' + suppercode + '.jpg'));
 			});

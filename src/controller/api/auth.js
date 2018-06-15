@@ -55,6 +55,7 @@ module.exports = class extends Base {
         last_login_time: parseInt(new Date().getTime() / 1000),
         last_login_ip: clientIp,
         tel: '',
+        count: 1,
         weixin_openid: sessionData.openid,
         avatar: userInfo.avatarUrl || '',
         gender: userInfo.gender || 1, // 性别 0：未知、1：男、2：女
