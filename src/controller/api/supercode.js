@@ -8,6 +8,14 @@ module.exports = class extends Base {
     	return this.success(model);
 	}
 
+	// 统计可用二维码生成码
+	async countAction() {
+		const model = await this.model('supercode').where({user_id: ''}).count();
+
+    	return this.success(model);
+	}
+
+	// 生成二维码
 	async createwxaqrcodeAction() {
 		const weixinService = this.service('weixin', 'api');
 		const miniImage = await weixinService.createwxminiQrcode(this.get('id'));
@@ -15,6 +23,7 @@ module.exports = class extends Base {
 		return this.success(miniImage);
 	}
 
+	// 添加二维码生成码
 	async addAction() {
 		const model = await this.model('supercode');
 		const codes = [];
@@ -34,6 +43,7 @@ module.exports = class extends Base {
 		return this.success('添加成功!');
 	}
 
+	// 删除全部
 	async deleteAllAction() {
 		const model = await this.model('supercode').delete();
 		return this.success('删除成功!');

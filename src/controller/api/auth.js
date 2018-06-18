@@ -55,10 +55,10 @@ module.exports = class extends Base {
         last_login_time: parseInt(new Date().getTime() / 1000),
         last_login_ip: clientIp,
         tel: '',
-        count: 1,
+        count: 5,
         weixin_openid: sessionData.openid,
         avatar: userInfo.avatarUrl || '',
-        gender: userInfo.gender || 1, // 性别 0：未知、1：男、2：女
+        gender: userInfo.gender || 1,
         nickname: userInfo.nickName
       });
     }
@@ -83,6 +83,51 @@ module.exports = class extends Base {
 
     return this.success({ token: sessionKey, userInfo: newUserInfo });
   }
+
+
+
+  async countIncrementAction() {
+    let id = this.get('id');
+
+    if(id) {
+      let inc = await this.model('user').where({ id: id, count: ['<', 100] }).increment('count', 1);
+
+      return this.success('增加联系件成功');
+    }
+
+    return this.fail('增加联系件失败');
+  }
+
+
+
+  async countDecrementAction() {
+    let id = this.get('id');
+    let count = await this.model('user').where({ id: id }).field('count').find();
+
+    if(id) {
+      let inc = await this.model('user').where({ id: id, count: ['>', 0] }).decrement('count', 1);
+
+      return this.success('减少联系件成功');
+    }
+
+    return this.fail('减少联系件失败');
+  }
+
+
+
+  async allCountAction() {
+    let id = this.get('id');
+
+    if(id) {
+      let count = await this.model('user').where({ id: id }).field('count').find();
+
+      return this.success(count);
+    }
+
+    return this.fail();
+  }
+
+
 
   async logoutAction() {
     return this.success();

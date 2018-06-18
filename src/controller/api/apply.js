@@ -15,13 +15,16 @@ module.exports = class extends BaseRest {
 		}else if(supercode_id) {
 			model = await applysModel.where({supercode_id: supercode_id}).field('id, name, tel, image, type').find();
 		}else if(user_id) {
-			model = await applysModel.where({user_id: user_id}).field('id, name, tel, image, type').order('id DESC').select();
+			model = await applysModel.where({user_id: user_id}).field('id, name, tel, image, type, supercode_id').order('id DESC').select();
 		}else {
 			model = await applysModel.order('id DESC').select();
 		}
 
 		this.success(model);
 	}
+
+
+
 
 	async postAction() {
 		const post = this.post();
@@ -30,24 +33,46 @@ module.exports = class extends BaseRest {
 		if(!superCode) {
 			return this.fail('缺少supercode码');
 		}
-		
-		const data = Object.assign({}, post, {
-			supercode_id: superCode,
-			create_date: parseInt(new Date().getTime() / 1000),
-		});
-		const add =  await this.model('applys').add(data);
 
-		// 生成二维码
-		const weixinService = this.service('weixin', 'api');
-		const miniImage = await weixinService.createwxminiQrcode(superCode, post.user_id);
+		// 查询用户可生成次数
+		let user = await this.model('user').where({username: post.user_id, count: ['>', 0]}).find();
+		let addData = {
+			create_date: parseInt(new Date().getTime() / 1000)
+		};
+		let miniImage = '';
+
+		if(!think.isEmpty(user)) {
+			addData.supercode_id = superCode;
+			let inc = await this.model('user').where({username: post.user_id}).decrement('count', 1);
+
+			// 生成二维码
+			const weixinService = this.service('weixin', 'api');
+			miniImage = await weixinService.createwxminiQrcode(superCode, post.user_id);
+		}
+		
+		const add =  await this.model('applys').add(Object.assign({}, post, addData));
 
 		
 		this.success({codeImage: miniImage});
 	}
 
-	putAction() {
 
+
+
+	async putAction() {
+		let id = this.get('id');
+		let post = this.post();
+		
+		const data = Object.assign({}, post, {
+			// last_edit_date: parseInt(new Date().getTime() / 1000),
+		});
+		const update =  await this.model('applys').where({id: id}).update(data);
+
+		this.success(update);
 	}
+
+
+
 
 	deleteAction() {
 

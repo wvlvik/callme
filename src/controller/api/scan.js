@@ -1,6 +1,7 @@
 const BaseRest = require('../rest.js');
 
 module.exports = class extends BaseRest {
+
 	async getAction() {
 		const id = this.get('id');
 		let model;

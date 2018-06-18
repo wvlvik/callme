@@ -12,7 +12,6 @@ module.exports = class extends think.Logic {
   		return this.fail(errorCode);
   	}
 
-
   }
 
 
