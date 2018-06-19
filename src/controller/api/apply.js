@@ -78,8 +78,9 @@ module.exports = class extends BaseRest {
 	async deleteAction() {
 		let id = this.post('id');
 
-		const supercode = await this.model('applys').where({id: id}).field('supercode_id').find();
+		const supercode = await this.model('applys').where({id: id}).field('supercode_id', 'user_id').find();
 		const deletes =  await this.model('applys').where({id: id}).delete();
+		const increment =  await this.model('user').where({username: supercode.user_id, count: ['<', 100]}).increment('count', 1);
 
 		const removeUser_id = await this.model('supercode').where({code: supercode.supercode_id}).update({user_id: ''});
 
