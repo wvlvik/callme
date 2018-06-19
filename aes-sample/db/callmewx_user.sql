@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 14, 2018 at 09:47 AM
+-- Generation Time: Jun 19, 2018 at 11:25 AM
 -- Server version: 5.5.40
 -- PHP Version: 5.6.36
 
@@ -39,8 +39,9 @@ CREATE TABLE IF NOT EXISTS `callmewx_user` (
   `gender` tinyint(4) NOT NULL,
   `nickname` varchar(64) NOT NULL,
   `count` tinyint(4) NOT NULL,
+  `user_vip` int(11) NOT NULL,
   `create_date` bigint(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -60,7 +61,7 @@ ALTER TABLE `callmewx_user`
 -- AUTO_INCREMENT for table `callmewx_user`
 --
 ALTER TABLE `callmewx_user`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
