@@ -66,9 +66,13 @@ module.exports = class extends think.Service {
 				// 更新数据
 				const update = _this.model('supercode').where({id: sc.id}).update({user_id: user_id});
 
-				console.log('-----------add image-------------');
+				let img = 'www/uploads/code/' + suppercode + '.jpg';
+				let fss = fs.stat(img, function(error, st) {
+					if(!st) {
+						return response.data.pipe(fs.createWriteStream(img));
+					}
+				});
 
-				return response.data.pipe(fs.createWriteStream('www/uploads/code/' + suppercode + '.jpg'));
 			});
 		}
 		

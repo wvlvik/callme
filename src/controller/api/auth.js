@@ -66,7 +66,7 @@ module.exports = class extends Base {
     sessionData.user_id = userId;
 
     // 查询用户信息
-    const newUserInfo = await this.model('user').field(['id', 'username', 'nickname', 'gender', 'avatar']).where({ id: userId }).find();
+    const newUserInfo = await this.model('user').field(['id', 'username', 'nickname', 'gender', 'avatar', 'user_vip']).where({ id: userId }).find();
 
     // 更新登录信息
     userId = await this.model('user').where({ id: userId }).update({
@@ -86,11 +86,40 @@ module.exports = class extends Base {
 
 
 
-  async countIncrementAction() {
+  async deleteUserAction() {
     let id = this.get('id');
 
     if(id) {
-      let inc = await this.model('user').where({ id: id, count: ['<', 100] }).increment('count', 1);
+      let del = await this.model('user').where({id: id}).delete();
+
+      return this.success('用户删除成功');
+    }
+
+    return this.fail('用户删除失败');
+  }
+
+
+
+  async iamVipAction() {
+    let id = this.get('id');
+
+    if(id) {
+      let vip = await this.model('user').where({id: id}).update({user_vip: 1});
+
+      return this.success('VIP增加成功');
+    }
+
+    return this.fail('VIP增加失败');
+  }
+
+
+
+  async countIncrementAction() {
+    let id = this.get('id');
+    let num = this.get('num');
+
+    if(id) {
+      let inc = await this.model('user').where({ id: id, count: ['<', 100] }).increment('count', num ? num : 1);
 
       return this.success('增加联系件成功');
     }

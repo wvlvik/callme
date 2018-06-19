@@ -53,7 +53,7 @@ module.exports = class extends BaseRest {
 		const add =  await this.model('applys').add(Object.assign({}, post, addData));
 
 		
-		this.success({codeImage: miniImage});
+		this.success({id: add, codeImage: miniImage});
 	}
 
 
@@ -69,14 +69,21 @@ module.exports = class extends BaseRest {
 		const update =  await this.model('applys').where({id: id}).update(data);
 		const miniImage =  await this.model('applys').where({id: id}).field('supercode_id').find();
 
-		this.success({codeImage: miniImage.supercode_id + '.jpg'});
+		this.success({id: id, codeImage: miniImage.supercode_id + '.jpg'});
 	}
 
 
 
 
-	deleteAction() {
+	async deleteAction() {
+		let id = this.post('id');
 
+		const supercode = await this.model('applys').where({id: id}).field('supercode_id').find();
+		const deletes =  await this.model('applys').where({id: id}).delete();
+
+		const removeUser_id = await this.model('supercode').where({code: supercode.supercode_id}).update({user_id: ''});
+
+		return this.success('删除成功!');
 	}
 
 
