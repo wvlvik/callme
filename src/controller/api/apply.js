@@ -69,7 +69,7 @@ module.exports = class extends BaseRest {
 		const update =  await this.model('applys').where({id: id}).update(data);
 		const miniImage =  await this.model('applys').where({id: id}).field('supercode_id').find();
 
-		this.success({codeImage: miniImage + 'jpg'});
+		this.success({codeImage: miniImage.supercode_id + '.jpg'});
 	}
 
 
