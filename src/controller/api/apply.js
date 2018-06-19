@@ -67,8 +67,9 @@ module.exports = class extends BaseRest {
 			// last_edit_date: parseInt(new Date().getTime() / 1000),
 		});
 		const update =  await this.model('applys').where({id: id}).update(data);
+		const miniImage =  await this.model('applys').where({id: id}).field('supercode_id').find();
 
-		this.success(update);
+		this.success({codeImage: miniImage + 'jpg'});
 	}
 
 
