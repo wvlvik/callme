@@ -99,6 +99,20 @@ module.exports = class extends Base {
   }
 
 
+  // 通过username获取用户信息
+  async getUserAction() {
+    let user_id = this.get('user_id');
+
+    if(user_id) {
+      let user = await this.model('user').where({username: user_id}).field('nickname, avatar, gender, user_vip').find();
+
+      return this.success(user);
+    }
+
+    return this.fail('获取失败');
+  }
+
+
 
   async iamVipAction() {
     let id = this.get('id');

@@ -13,7 +13,7 @@ module.exports = class extends BaseRest {
 		if(id) {
 			model = await applysModel.where({id: id}).find();
 		}else if(supercode_id) {
-			model = await applysModel.where({supercode_id: supercode_id}).field('id, name, tel, image, type').find();
+			model = await applysModel.where({supercode_id: supercode_id}).field('id, name, tel, image, type, user_id').find();
 		}else if(user_id) {
 			model = await applysModel.where({user_id: user_id}).field('id, name, tel, image, type, supercode_id').order('id DESC').select();
 		}else {
