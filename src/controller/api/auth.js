@@ -71,7 +71,9 @@ module.exports = class extends Base {
     // 更新登录信息
     userId = await this.model('user').where({ id: userId }).update({
       last_login_time: parseInt(new Date().getTime() / 1000),
-      last_login_ip: clientIp
+      last_login_ip: clientIp,
+      avatar: userInfo.avatarUrl || '',
+      nickname: userInfo.nickName
     });
 
     const TokenSerivce = this.service('token', 'api');
