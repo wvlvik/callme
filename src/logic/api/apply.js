@@ -7,6 +7,7 @@ module.exports = class extends think.Logic {
 
   	let post = this.post();
   	let errorCode = '内容未填写完整';
+    let text = '';
 
   	if(post.type == 2) {
   		text = post.custom_word;
