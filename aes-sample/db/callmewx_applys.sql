@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 15, 2018 at 09:21 AM
+-- Generation Time: Jun 20, 2018 at 07:01 AM
 -- Server version: 5.5.40
 -- PHP Version: 5.6.36
 
@@ -32,6 +32,8 @@ CREATE TABLE IF NOT EXISTS `callmewx_applys` (
   `tel` varchar(32) NOT NULL,
   `image` varchar(256) NOT NULL,
   `type` tinyint(11) NOT NULL,
+  `custom_word` varchar(512) NOT NULL,
+  `custom_text` text NOT NULL,
   `user_id` varchar(64) NOT NULL,
   `supercode_id` varchar(64) NOT NULL,
   `create_date` bigint(128) NOT NULL
