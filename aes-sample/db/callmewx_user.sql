@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2018 at 11:25 AM
+-- Generation Time: Jun 19, 2018 at 04:28 PM
 -- Server version: 5.5.40
--- PHP Version: 5.6.36
+-- PHP Version: 5.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `callmewx_user` (
   `last_login_ip` varchar(32) NOT NULL,
   `tel` varchar(32) NOT NULL,
   `weixin_openid` varchar(128) NOT NULL,
-  `avatar` varchar(64) NOT NULL,
+  `avatar` varchar(512) NOT NULL,
   `gender` tinyint(4) NOT NULL,
   `nickname` varchar(64) NOT NULL,
   `count` tinyint(4) NOT NULL,
