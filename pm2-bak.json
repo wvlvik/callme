@@ -2,7 +2,7 @@
   "apps": [{
     "name": "wxcallme",
     "script": "production.js",
-    "cwd": "/media/psf/Home/uimix/wxcallme",
+    "cwd": "/usr/share/nginx/callme",
     "exec_mode": "fork",
     "max_memory_restart": "1G",
     "autorestart": true,
